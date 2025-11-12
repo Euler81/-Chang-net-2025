@@ -63,57 +63,246 @@ Antes de empezar, asegúrate de tener instalado en tu computadora:
 ## 📁 **2. ESTRUCTURA DEL PROYECTO**
 
 ```
-D:\changanet\
-├── changanet-frontend\          # Frontend (React.js)
-│   ├── public\
-│   ├── src\
-│   │   ├── components\
-│   │   │   ├── modals\
-│   │   │   │   ├── LoginModal.jsx
-│   │   │   │   └── SignupModal.jsx
-│   │   │   └── dashboard\
-│   │   │       ├── ClientDashboard.jsx
-│   │   │       └── ProfessionalDashboard.jsx
-│   │   ├── pages\
-│   │   │   ├── Home.jsx
-│   │   │   ├── Professionals.jsx
-│   │   │   ├── ProfessionalDetail.jsx
-│   │   │   └── Dashboard.jsx
-│   │   ├── context\
-│   │   │   └── AuthContext.jsx
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── tailwind.config.js
-│   ├── postcss.config.js
+changanet/
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+├── prometheus.yml
+├── README.md
+├── test-google-oauth.js
+├── test-integration.js
+├── test-jest.js
+├── test-metrics-custom.js
+├── test-prometheus.js
+├── test-sentry-backend.js
+├── test-sentry-frontend.js
+├── changanet-backend/
+│   ├── .env.example
+│   ├── .eslintrc.js
+│   ├── .gitignore
+│   ├── .lintstagedrc.js
+│   ├── .prettierrc
+│   ├── docker-compose.redis.yml
+│   ├── ecosystem.config.js
+│   ├── jest.config.js
+│   ├── package-lock.json
 │   ├── package.json
-│   └── README.md
-└── changanet-backend\           # Backend (Node.js/Express)
-    ├── prisma\
-    │   └── schema.prisma
-    ├── src\
-    │   ├── controllers\
-    │   │   ├── authController.js
-    │   │   ├── profileController.js
-    │   │   ├── searchController.js
-    │   │   ├── messageController.js
-    │   │   ├── reviewController.js
-    │   │   └── availabilityController.js
-    │   ├── routes\
-    │   │   ├── authRoutes.js
-    │   │   ├── profileRoutes.js
-    │   │   ├── searchRoutes.js
-    │   │   ├── messageRoutes.js
-    │   │   ├── reviewRoutes.js
-    │   │   └── availabilityRoutes.js
-    │   ├── middleware\
-    │   │   └── authenticate.js
-    │   ├── services\
-    │   │   └── notificationService.js
-    │   └── server.js
-    ├── .env
-    ├── .gitignore
-    ├── package.json
+│   ├── README-cache.md
+│   ├── README-production.md
+│   ├── README.md
+│   ├── test-cloudinary.js
+│   ├── test-db.js
+│   ├── test-fcm-notifications.js
+│   ├── test-fcm-push.js
+│   ├── test-fcm-send.js
+│   ├── test-firebase-admin.js
+│   ├── test-register.js
+│   ├── test-sendgrid.js
+│   ├── test-socketio.js
+│   ├── test-twilio.js
+│   ├── docs/
+│   │   ├── database-diagram.png
+│   │   └── database-optimization-guide.md
+│   │   └── swagger.yaml
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   ├── docs/
+│   │   │   └── database-diagram.png
+│   │   └── migrations/
+│   │       ├── migration_lock.toml
+│   │       ├── 20251008171024_init/
+│   │       │   └── migration.sql
+│   │       └── 20251010162315_add_google_fields/
+│   │           └── migration.sql
+│   └── src/
+│       ├── server.js
+│       ├── config/
+│       │   ├── firebaseAdmin.js
+│       │   └── passport.js
+│       ├── controllers/
+│       │   ├── authController.js
+│       │   ├── availabilityController.js
+│       │   ├── contactController.js
+│       │   ├── custodyController.js
+│       │   ├── galleryController.js
+│       │   ├── healthController.js
+│       │   ├── messageController.js
+│       │   ├── newsletterController.js
+│       │   ├── notificationController.js
+│       │   ├── paymentController.js
+│       │   ├── profileController.js
+│       │   ├── quoteController.js
+│       │   ├── rankingController.js
+│       │   ├── reviewController.js
+│       │   ├── searchController.js
+│       │   ├── serviceController.js
+│       │   ├── statsController.js
+│       │   └── verificationController.js
+│       ├── docs/
+│       │   └── swagger.yaml
+│       ├── middleware/
+│       │   ├── authenticate.js
+│       │   ├── logging.js
+│       │   └── metricsMiddleware.js
+│       ├── routes/
+│       │   ├── authRoutes.js
+│       │   ├── availabilityRoutes.js
+│       │   ├── contactRoutes.js
+│       │   ├── custodyRoutes.js
+│       │   ├── galleryRoutes.js
+│       │   ├── messageRoutes.js
+│       │   ├── metricsRoutes.js
+│       │   ├── newsletterRoutes.js
+│       │   ├── notificationRoutes.js
+│       │   ├── paymentRoutes.js
+│       │   ├── profileRoutes.js
+│       │   ├── quoteRoutes.js
+│       │   ├── rankingRoutes.js
+│       │   ├── reviewRoutes.js
+│       │   ├── searchRoutes.js
+│       │   ├── serviceRoutes.js
+│       │   ├── servicesRoutes.js
+│       │   ├── statsRoutes.js
+│       │   └── verificationRoutes.js
+│       ├── services/
+│       │   ├── authService.js
+│       │   ├── backupService.js
+│       │   ├── cacheService.js
+│       │   ├── chatService.js
+│       │   ├── emailService.js
+│       │   ├── logger.js
+│       │   ├── loggingService.js
+│       │   ├── metricsService.js
+│       │   ├── notificationService.js
+│       │   ├── paymentsService.js
+│       │   ├── pushNotificationService.js
+│       │   ├── queryMonitorService.js
+│       │   ├── sentryService.js
+│       │   ├── smsService.js
+│       │   ├── storageService.js
+│       │   └── verificationService.js
+│       ├── tests/
+│       │   ├── setupTestDB.js
+│       │   ├── integration/
+│       │   │   ├── authFlow.test.js
+│       │   │   ├── authRoutes.test.js
+│       │   │   ├── serviceRoutes.test.js
+│       │   │   ├── statsRoutes.test.js
+│       │   │   └── verification.test.js
+│       │   └── unit/
+│       │       ├── authController.test.js
+│       │       └── statsController.test.js
+│       └── tests/
+│           ├── integration/
+│           │   ├── authFlow.test.js
+│           │   └── paymentFlow.test.js
+├── changanet-frontend/
+│   ├── README.md
+│   ├── tailwind.config.js
+│   ├── vite.config.js
+│   ├── public/
+│   │   ├── firebase-messaging-sw.js
+│   │   ├── index.html
+│   │   └── vite.svg
+│   └── src/
+│       ├── index.css
+│       ├── main.jsx
+│       ├── serviceWorker.js
+│       ├── assets/
+│       │   └── react.svg
+│       ├── components/
+│       │   ├── NotificationBell.jsx
+│       │   ├── NotificationCenter.jsx
+│       │   ├── NotificationPanel.jsx
+│       │   ├── OnboardingTutorial.jsx
+│       │   ├── PayButton.jsx
+│       │   ├── ProfessionalCard.jsx
+│       │   ├── ProfilePicture.jsx
+│       │   ├── QuickMessageModal.jsx
+│       │   ├── QuoteRequestForm.jsx
+│       │   ├── RankingDisplay.jsx
+│       │   ├── RatingDisplay.jsx
+│       │   ├── SearchBar.jsx
+│       │   ├── SubscribeForm.jsx
+│       │   ├── SuccessAlert.jsx
+│       │   ├── VerificationForm.jsx
+│       │   ├── VerifiedBadge.jsx
+│       │   └── modals/
+│       │       ├── LoginModal.jsx
+│       │       ├── ProfileModal.jsx
+│       │       ├── QuoteRequestModal.jsx
+│       │       └── SignupModal.jsx
+│       ├── config/
+│       │   ├── firebaseConfig.js
+│       │   └── sentryConfig.js
+│       ├── context/
+│       │   ├── AuthContext.jsx
+│       │   ├── ChatContext.jsx
+│       │   ├── ModalContext.jsx
+│       │   └── NotificationContext.jsx
+│       ├── data/
+│       │   └── helpContent.js
+│       ├── hooks/
+│       │   ├── useAccessibility.js
+│       │   ├── useChat.js
+│       │   ├── useNotifications.js
+│       │   ├── useOnboarding.js
+│       │   └── useSmartNavigation.js
+│       ├── i18n/
+│       │   └── index.js
+│       ├── pages/
+│       │   ├── AdminVerification.jsx
+│       │   ├── AdminVerificationPage.jsx
+│       │   ├── AuthCallback.jsx
+│       │   ├── Availability.jsx
+│       │   ├── ClientDashboard.jsx
+│       │   ├── ClientProfile.jsx
+│       │   ├── ClientSettings.jsx
+│       │   ├── ClientSignupPage.jsx
+│       │   ├── ContactPage.jsx
+│       │   ├── Cookies.jsx
+│       │   ├── Custody.jsx
+│       │   ├── Dashboard.jsx
+│       │   ├── Home.jsx
+│       │   ├── JoinPage.jsx
+│       │   ├── Notifications.jsx
+│       │   ├── Privacy.jsx
+│       │   ├── ProfessionalDashboard.jsx
+│       │   ├── ProfessionalDetail.jsx
+│       │   ├── ProfessionalProfile.jsx
+│       │   ├── Professionals.jsx
+│       │   ├── ProfessionalSignupPage.jsx
+│       │   ├── Profile.jsx
+│       │   ├── Quotes.jsx
+│       │   ├── Ranking.jsx
+│       │   ├── Terms.jsx
+│       │   ├── VerifyIdentity.jsx
+│       ├── services/
+│       │   ├── apiService.js
+│       │   ├── authService.js
+│       │   ├── chatService.js
+│       │   ├── fcmService.js
+│       │   ├── mapService.js
+│       │   ├── notificationService.js
+│       │   └── storageService.js
+│       ├── styles/
+│       │   └── onboarding.css
+│       ├── test/
+│       │   ├── importMetaMock.js
+│       │   └── setup.js
+│       └── tests/
+│           ├── e2e/
+│           │   ├── authFlow.e2e.js
+│           │   └── paymentFlow.e2e.js
+│           ├── integration/
+│           │   └── homePage.test.js
+│           └── unit/
+│               ├── App.test.js
+│               ├── GoogleLoginButton.test.jsx
+│               └── VerificationForm.test.jsx
+└── tests/
     └── README.md
+
 ```
 
 ---
@@ -470,5 +659,3 @@ Con este instructivo, has logrado:
 *   **Ejecutar el frontend y el backend simultáneamente.**
 *   **Probar todas las funcionalidades clave del MVP.**
 *   **Verificar que los datos se guardan correctamente en la base de datos.**
-
-¡Tu proyecto Changánet está listo para ser desarrollado, probado y lanzado al mercado! 🚀
